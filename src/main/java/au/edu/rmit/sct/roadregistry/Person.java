@@ -1,6 +1,14 @@
 package au.edu.rmit.sct.roadregistry;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,6 +74,78 @@ public class Person {
         return date.matches("^\\d{2}-\\d{2}-\\d{4}$");
     } 
  // TODO: Implement updatePersonalDetails 
+
+     public boolean updatePersonalDetails(String newID, String newFirstName, String newLastName, String newAddress, String newBirthdate) {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("persons.txt"));
+            List<String> updatedLines = new ArrayList<>();
+            boolean updated = false;
+
+            for (String line : lines) {
+                String[] parts = line.split(",", -1);
+                if (parts.length < 7) continue;
+
+                if (parts[0].equals(this.personID)) {
+                    // Preserve unchanged fields
+                    int oldAge = getAge(this.birthdate);
+                    int newAge = getAge(newBirthdate);
+
+                    // Rule 1: Address can only change if the person is 18 or older
+                    if (oldAge < 18 && !this.address.equals(newAddress)) return false;
+
+                    // Rule 2: if birthdate changes, ID and other details must remain the same
+                    boolean birthdayChanged = !this.birthdate.equals(newBirthdate);
+                    boolean otherChanged = !this.personID.equals(newID) || !this.firstName.equals(newFirstName)
+                            || !this.lastName.equals(newLastName) || !this.address.equals(newAddress);
+                    if (birthdayChanged && otherChanged) return false;
+
+                    // Rule 3: ID cannot change if the first digit is even and not the same as the new ID
+                    char firstDigit = this.personID.charAt(0);
+                    if (Character.isDigit(firstDigit) && (firstDigit - '0') % 2 == 0 && !this.personID.equals(newID)) {
+                        return false;
+                    }
+
+                    // details validation
+                    if (!isValidPersonID(newID) || !isValidAddress(newAddress) || !isValidBirthdate(newBirthdate)) {
+                        return false;
+                    }
+
+                    // Update local object
+                    this.personID = newID;
+                    this.firstName = newFirstName;
+                    this.lastName = newLastName;
+                    this.address = newAddress;
+                    this.birthdate = newBirthdate;
+
+                    // Rebuild the line
+                    String updatedLine = String.join(",", newID, newFirstName, newLastName, newAddress, newBirthdate, parts[5], parts[6]);
+                    updatedLines.add(updatedLine);
+                    updated = true;
+                } else {
+                    updatedLines.add(line); // no change
+                }
+            }
+
+            if (updated) {
+                Files.write(Paths.get("persons.txt"), updatedLines);
+            }
+
+            return updated;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private int getAge(String dob) {
+        try {
+            LocalDate birth = LocalDate.parse(dob, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            return Period.between(birth, LocalDate.now()).getYears();
+        } catch (DateTimeParseException e) {
+            return -1; // invalid
+        }
+    }
 // TODO: Implement addDemeritPoints 
 
  
