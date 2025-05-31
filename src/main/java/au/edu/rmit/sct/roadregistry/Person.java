@@ -152,10 +152,45 @@ public class Person {
      return "Failed";
  }
   try {
-      // Append the offense to offenses.txt
+      // appending the offense to offenses.txt
       try (FileWriter writer = new FileWriter("offenses.txt", true)) {
       writer.write(String.join(",", this.personID, offenseDate, String.valueOf(points)) + "\n");
             }
+  //calculating total demerit points in the last 2 years
+      List<String> lines = Files.readAllLines(Paths.get("offenses.txt"));
+      int total = 0;
+      LocalDate now = LocalDate.now();
+      DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+      for (String line : lines) {
+                String[] parts = line.split(",", -1);
+                if (parts.length != 3) continue;
+                if (!parts[0].equals(this.personID)) continue;
+
+                LocalDate offense = LocalDate.parse(parts[1], fmt);
+                // REPLACE the Period-based check with:
+                LocalDate twoYearsAgo = LocalDate.now().minusYears(2);
+                if (!offense.isBefore(twoYearsAgo)) {
+                    total += Integer.parseInt(parts[2]);
+             }
+       }
+      this.demeritPoints = total;
+
+            int age = getAge(this.birthdate);
+            if ((age < 21 && total > 6) || (age >= 21 && total > 12)) {
+                this.isSuspended = true;
+            }
+
+            // updates suspension status in persons.txt
+            updateSuspensionStatus();
+
+            return "Success";
+
+        } catch (IOException | DateTimeParseException | NumberFormatException e) {
+            e.printStackTrace();
+            return "Failed";
+        }
+    }
 
 
  
