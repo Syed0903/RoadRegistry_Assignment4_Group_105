@@ -191,6 +191,12 @@ public class Person {
             return "Failed";
         }
     }
+public boolean isSuspended() {
+        return this.isSuspended;
+    }
+ public int getDemeritPoints() {
+        return this.demeritPoints;
+    }
 
 
  
