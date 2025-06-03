@@ -27,4 +27,13 @@ public class PersonTest {
         assertEquals("Failed", p.addDemeritPoints("2024-03-15", 3)); // YYYY-MM-DD format
     }
 
+    void addDemeritPoints_Under21Suspension_UpdatesStatus() {
+        Person p = new Person("56s@d#&RT", "Tom", "Smith",
+                "45|Park St|Melbourne|Victoria|Australia", "01-01-2007");
+        p.addPerson();
+        p.addDemeritPoints("01-01-2024", 3);
+        p.addDemeritPoints("01-02-2024", 4); // Total = 7 (>6)
+        assertTrue(p.isSuspended());
+    }
+
 }
