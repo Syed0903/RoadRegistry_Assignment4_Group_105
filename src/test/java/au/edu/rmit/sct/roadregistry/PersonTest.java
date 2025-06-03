@@ -32,7 +32,7 @@ public class PersonTest {
         p.addPerson();
         assertEquals("Failed", p.addDemeritPoints("2024-03-15", 3)); // YYYY-MM-DD format
     }
-
+    @Test
     void addDemeritPoints_Under21Suspension_UpdatesStatus() {
         Person p = new Person("56s@d#&RT", "Tom", "Smith",
                 "45|Park St|Melbourne|Victoria|Australia", "01-01-2007");
@@ -41,7 +41,7 @@ public class PersonTest {
         p.addDemeritPoints("01-02-2024", 4); // Total = 7 (>6)
         assertTrue(p.isSuspended());
     }
-
+    
     void addDemeritPoints_ExactlyTwoYearsAgo_CountsPoints() {
         Person p = new Person("89*&^cFG", "Lucy", "Chen",
                 "33|Elm St|Melbourne|Victoria|Australia", "05-05-1985");
