@@ -147,7 +147,7 @@ public class Person {
         }
     }
 // TODO: Implement addDemeritPoints 
- public string addDemeritPoints(String offenseDate, int points){
+ public String addDemeritPoints(String offenseDate, int points){
     if(!offenseDate.matches("^\\d {2}-\\d{2}-\\d{4}$") || points < 1 || points > 6){
      return "Failed";
  }
