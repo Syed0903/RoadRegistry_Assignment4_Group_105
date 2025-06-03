@@ -10,7 +10,13 @@ import java.nio.file.Paths;
 import java.io.IOException;
 
 public class PersonTest {
-    //testing to see if valid input  returns successfully
+
+    @BeforeEach
+    void resetFiles() throws IOException {
+        Files.write(Paths.get("persons.txt"), new byte[0]);   // clear file
+        Files.write(Paths.get("offenses.txt"), new byte[0]);  // clear file
+    }
+
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
         Person p = new Person("58a#@d%XYQ", "Ali", "Zed",
