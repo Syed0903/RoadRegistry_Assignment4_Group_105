@@ -16,6 +16,14 @@ public class PersonTest {
         Files.write(Paths.get("persons.txt"), new byte[0]);   // clear file
         Files.write(Paths.get("offenses.txt"), new byte[0]);  // clear file
     }
+    
+    // test to see if the addPerson() returns true when given valid inputs
+    @Test
+    void addPerson_ValidDetails_ReturnsTrue() {
+        Person p = new Person("23@#$abCD", "John", "Doe",
+                "10|Main St|Melbourne|Victoria|Australia", "15-05-1980");
+        assertTrue(p.addPerson());
+    }
 
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
