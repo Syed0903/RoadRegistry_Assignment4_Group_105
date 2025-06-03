@@ -31,6 +31,13 @@ public class PersonTest {
                 "20|Park Ave|Melbourne|Victoria|Australia", "01-01-2000");
         assertFalse(p.addPerson());
     }
+    // test to see if addPerson() returns false when the address state is not Victoria
+    @Test
+    void addPerson_AddressNotVictoria_ReturnsFalse() {
+        Person p = new Person("56#@$!ABX", "Mike", "Smith",
+                "100|King St|Sydney|NSW|Australia", "20-05-1985");
+        assertFalse(p.addPerson());
+    }
 
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
