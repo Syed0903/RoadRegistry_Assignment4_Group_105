@@ -41,7 +41,7 @@ public class PersonTest {
         p.addDemeritPoints("01-02-2024", 4); // Total = 7 (>6)
         assertTrue(p.isSuspended());
     }
-    
+    @Test 
     void addDemeritPoints_ExactlyTwoYearsAgo_CountsPoints() {
         Person p = new Person("89*&^cFG", "Lucy", "Chen",
                 "33|Elm St|Melbourne|Victoria|Australia", "05-05-1985");
