@@ -198,6 +198,26 @@ public boolean isSuspended() {
         return this.demeritPoints;
     }
 
+    private void updateSuspensionStatus() throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get("persons.txt"));
+        List<String> updated = new ArrayList<>();
+
+        for (String line : lines) {
+            String[] parts = line.split(",", -1);
+            if (parts.length < 7) continue;
+
+            if (parts[0].equals(this.personID)) {
+                // Rebuild updated line
+                String updatedLine = String.join(",", personID, firstName, lastName, address, birthdate,
+                        String.valueOf(demeritPoints), String.valueOf(isSuspended));
+                updated.add(updatedLine);
+            } else {
+                updated.add(line);
+            }
+        }
+
+        Files.write(Paths.get("persons.txt"), updated);
+    }
 
  
 }
