@@ -36,4 +36,19 @@ public class PersonTest {
         assertTrue(p.isSuspended());
     }
 
+    void addDemeritPoints_ExactlyTwoYearsAgo_CountsPoints() {
+        Person p = new Person("89*&^cFG", "Lucy", "Chen",
+                "33|Elm St|Melbourne|Victoria|Australia", "05-05-1985");
+        assertTrue(p.addPerson());
+
+        LocalDate offenseDate = LocalDate.now().minusYears(2).plusDays(1);  // ensures it's just inside 2 years
+
+        p.addDemeritPoints(
+                offenseDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                2
+        );
+
+        assertEquals(2, p.getDemeritPoints());
+    }
+
 }
