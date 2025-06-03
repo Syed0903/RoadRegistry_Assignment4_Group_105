@@ -38,6 +38,13 @@ public class PersonTest {
                 "100|King St|Sydney|NSW|Australia", "20-05-1985");
         assertFalse(p.addPerson());
     }
+    // test to see if addPerson() returns false when the birthdate format is invalid
+    @Test
+    void addPerson_InvalidBirthdate_ReturnsFalse() {
+        Person p = new Person("78$%^&CDE", "Ella", "Brown",
+                "12|Queen St|Melbourne|Victoria|Australia", "1990-11-15");
+        assertFalse(p.addPerson());
+    }
 
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
