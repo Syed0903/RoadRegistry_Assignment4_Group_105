@@ -45,6 +45,14 @@ public class PersonTest {
                 "12|Queen St|Melbourne|Victoria|Australia", "1990-11-15");
         assertFalse(p.addPerson());
     }
+    // test to see if addPerson() returns false when ID has insufficient special characters in positions 3-8
+    @Test
+    void addPerson_InsufficientSpecialChars_ReturnsFalse() {
+        // Only 1 special char (@) in positions 3-8
+        Person p = new Person("34a@bcDEF", "Alex", "Taylor",
+                "50|Main St|Melbourne|Victoria|Australia", "01-01-2000");
+        assertFalse(p.addPerson());
+    }
 
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
