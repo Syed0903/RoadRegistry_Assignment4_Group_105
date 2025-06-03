@@ -16,13 +16,20 @@ public class PersonTest {
         Files.write(Paths.get("persons.txt"), new byte[0]);   // clear file
         Files.write(Paths.get("offenses.txt"), new byte[0]);  // clear file
     }
-    
     // test to see if the addPerson() returns true when given valid inputs
     @Test
     void addPerson_ValidDetails_ReturnsTrue() {
         Person p = new Person("23@#$abCD", "John", "Doe",
                 "10|Main St|Melbourne|Victoria|Australia", "15-05-1980");
         assertTrue(p.addPerson());
+    }
+    // test to see if addPerson() returns false when given an invalid ID format
+    @Test
+    void addPerson_InvalidIDFormat_ReturnsFalse() {
+        // First digit '1' is invalid
+        Person p = new Person("12!@#abCD", "Jane", "Doe",
+                "20|Park Ave|Melbourne|Victoria|Australia", "01-01-2000");
+        assertFalse(p.addPerson());
     }
 
     @Test
