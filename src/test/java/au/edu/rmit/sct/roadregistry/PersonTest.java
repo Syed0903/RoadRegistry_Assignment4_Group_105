@@ -62,6 +62,16 @@ public class PersonTest {
         assertTrue(p.updatePersonalDetails("57a$#c&DXY", "Samuel", "Lee",
                 "10|George St|Melbourne|Victoria|Australia", "01-01-1990"));
     }
+    // test to see if updatePersonalDetails() returns false when a person under 18 attempts to change their address
+    @Test
+    void updateDetails_Under18AddressChange_ReturnsFalse() {
+        // Age: 15 years (if current year is 2025)
+        Person p = new Person("59a#@d$XYQ", "Ali", "Zed",
+                "12|King St|Melbourne|Victoria|Australia", "01-01-2010");
+        p.addPerson();
+        assertFalse(p.updatePersonalDetails("59a#@d$XYQ", "Ali", "Zed",
+                "99|Fake St|Melbourne|Victoria|Australia", "01-01-2010"));
+    }
 
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
