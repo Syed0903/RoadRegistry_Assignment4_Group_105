@@ -53,6 +53,15 @@ public class PersonTest {
                 "50|Main St|Melbourne|Victoria|Australia", "01-01-2000");
         assertFalse(p.addPerson());
     }
+    // test to see if updatePersonalDetails() returns true when provided with valid updated details
+    @Test
+    void updateDetails_ValidUpdate_ReturnsTrue() {
+        Person p = new Person("57a$#c&DXY", "Sam", "Lee",
+                "10|George St|Melbourne|Victoria|Australia", "01-01-1990");
+        p.addPerson();
+        assertTrue(p.updatePersonalDetails("57a$#c&DXY", "Samuel", "Lee",
+                "10|George St|Melbourne|Victoria|Australia", "01-01-1990"));
+    }
 
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
