@@ -115,6 +115,15 @@ public class PersonTest {
         p.addPerson();
         assertEquals("Failed", p.addDemeritPoints("2024-03-15", 3)); // YYYY-MM-DD format
     }
+    //test to see if the demerit points are not in range it returns flase
+    @Test
+    void addDemeritPoints_PointsOutOfRange_ReturnsFailed() {
+        Person p = new Person("59c#%h&UYT", "Ella", "Brown",
+                "20|Main St|Melbourne|Victoria|Australia", "01-01-1995");
+        p.addPerson();
+        assertEquals("Failed", p.addDemeritPoints("15-03-2024", 7)); // Points > 6
+    }
+
     @Test
     void addDemeritPoints_Under21Suspension_UpdatesStatus() {
         Person p = new Person("56s@d#&RT", "Tom", "Smith",
