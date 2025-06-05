@@ -91,10 +91,15 @@ public class PersonTest {
         assertFalse(p.updatePersonalDetails("77a#%h&TT", "Nina", "Gill",
                 "18|Lane St|Melbourne|Victoria|Australia", "01-01-1999"));
     }
-
-
-    
-    
+    //test to see if invalid new address returns false
+    @Test
+    void updateDetails_InvalidNewAddress_ReturnsFalse() {
+        Person p = new Person("59x#@k&DPR", "Tom", "Jin",
+                "45|Main Rd|Melbourne|Victoria|Australia", "01-01-1998");
+        p.addPerson();
+        assertFalse(p.updatePersonalDetails("59x#@k&DPR", "Tom", "Jin",
+                "WrongFormatAddress", "01-01-1998"));
+    }
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
         Person p = new Person("58a#@d%XYQ", "Ali", "Zed",
