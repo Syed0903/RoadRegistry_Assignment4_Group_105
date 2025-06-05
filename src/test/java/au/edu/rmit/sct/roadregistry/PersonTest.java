@@ -4,18 +4,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import org.junit.jupiter.api.BeforeEach;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.IOException;
 
 public class PersonTest {
 
-    @BeforeEach
-    void resetFiles() throws IOException {
-        Files.write(Paths.get("persons.txt"), new byte[0]);   // clear file
-        Files.write(Paths.get("offenses.txt"), new byte[0]);  // clear file
-    }
+    
     // test to see if the addPerson() returns true when given valid inputs
     @Test
     void addPerson_ValidDetails_ReturnsTrue() {
