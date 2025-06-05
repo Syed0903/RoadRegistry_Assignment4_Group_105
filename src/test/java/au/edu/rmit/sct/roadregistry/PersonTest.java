@@ -81,16 +81,19 @@ public class PersonTest {
         assertFalse(p.updatePersonalDetails("58b%@h&JYU", "Sarah", "Wong",
                 "22|Market St|Melbourne|Victoria|Australia", "02-02-1995"));
     }
-    //test to check if updating birthday without updating anything else returns false
+    //test to check if changing the first digit of the ID returns false
     @Test
-    void updateDetails_BirthdayChangeWithOtherFields_ReturnsFalse() {
-        Person p = new Person("58b%@h&JYU", "Sara", "Wong",
-                "22|Market St|Melbourne|Victoria|Australia", "01-01-1995");
+    void updateDetails_EvenFirstDigitIDChange_ReturnsFalse() {
+        // First digit '4' is even
+        Person p = new Person("48a#%h&TT", "Nina", "Gill",
+                "18|Lane St|Melbourne|Victoria|Australia", "01-01-1999");
         p.addPerson();
-        assertFalse(p.updatePersonalDetails("58b%@h&JYU", "Sarah", "Wong",
-                "22|Market St|Melbourne|Victoria|Australia", "02-02-1995"));
+        assertFalse(p.updatePersonalDetails("77a#%h&TT", "Nina", "Gill",
+                "18|Lane St|Melbourne|Victoria|Australia", "01-01-1999"));
     }
 
+
+    
     
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
