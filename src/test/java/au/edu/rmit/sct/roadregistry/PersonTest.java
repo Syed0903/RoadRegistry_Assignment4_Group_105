@@ -72,6 +72,15 @@ public class PersonTest {
         assertFalse(p.updatePersonalDetails("59a#@d$XYQ", "Ali", "Zed",
                 "99|Fake St|Melbourne|Victoria|Australia", "01-01-2010"));
     }
+    // test to see if updatePersonalDetails() returns false when birthdate is changed along with the other fields
+    @Test
+    void updateDetails_BirthdayChangeWithOtherFields_ReturnsFalse() {
+        Person p = new Person("58b%@h&JYU", "Sara", "Wong",
+                "22|Market St|Melbourne|Victoria|Australia", "01-01-1995");
+        p.addPerson();
+        assertFalse(p.updatePersonalDetails("58b%@h&JYU", "Sarah", "Wong",
+                "22|Market St|Melbourne|Victoria|Australia", "02-02-1995"));
+    }
 
     @Test
     void addDemeritPoints_ValidInput_ReturnsSuccess() {
