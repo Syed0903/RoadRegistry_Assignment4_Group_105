@@ -2,8 +2,12 @@ package au.edu.rmit.sct.roadregistry;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class PersonTest {
 
@@ -127,6 +131,8 @@ public class PersonTest {
     }
     @Test 
     void addDemeritPoints_ExactlyTwoYearsAgo_CountsPoints() {
+        Files.write(Paths.get("offenses.txt"), new ArrayList<>());
+        
         Person p = new Person("89*&^cFG", "Lucy", "Chen",
                 "33|Elm St|Melbourne|Victoria|Australia", "05-05-1985");
         assertTrue(p.addPerson());
