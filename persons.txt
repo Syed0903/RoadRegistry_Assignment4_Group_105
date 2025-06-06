@@ -1,0 +1,11 @@
+57a$#c&DXY,Samuel,Lee,10|George St|Melbourne|Victoria|Australia,01-01-1990,0,false
+59c#%h&UYT,Ella,Brown,20|Main St|Melbourne|Victoria|Australia,01-01-1995,0,false
+57b#@g$TRU,Liam,West,10|George St|Melbourne|Victoria|Australia,01-01-1990,0,false
+48a#%h&TT,Nina,Gill,18|Lane St|Melbourne|Victoria|Australia,01-01-1999,0,false
+89*&^cFG,Lucy,Chen,33|Elm St|Melbourne|Victoria|Australia,05-05-1985,2,false
+59x#@k&DPR,Tom,Jin,45|Main Rd|Melbourne|Victoria|Australia,01-01-1998,0,false
+56s@d#&RT,Tom,Smith,45|Park St|Melbourne|Victoria|Australia,01-01-2007,7,true
+59a#@d$XYQ,Ali,Zed,12|King St|Melbourne|Victoria|Australia,01-01-2010,0,false
+58a#@d%XYQ,Ali,Zed,12|King St|Melbourne|Victoria|Australia,01-01-2000,3,false
+23@#$abCD,John,Doe,10|Main St|Melbourne|Victoria|Australia,15-05-1980,0,false
+58b%@h&JYU,Sara,Wong,22|Market St|Melbourne|Victoria|Australia,01-01-1995,0,false
