@@ -3,6 +3,7 @@ package au.edu.rmit.sct.roadregistry;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -62,10 +63,10 @@ public class PersonTest {
     @Test
     void updateDetails_Under18AddressChange_ReturnsFalse() {
         // Age: 15 years (if current year is 2025)
-        Person p = new Person("59a#@d$XYQ", "Ali", "Zed",
+        Person p = new Person("59a#@d", "Ali", "Zed",
                 "12|King St|Melbourne|Victoria|Australia", "01-01-2010");
         p.addPerson();
-        assertFalse(p.updatePersonalDetails("59a#@d$XYQ", "Ali", "Zed",
+        assertFalse(p.updatePersonalDetails("59a#@d", "Ali", "Zed",
                 "99|Fake St|Melbourne|Victoria|Australia", "01-01-2010"));
     }
     // test to see if updatePersonalDetails() returns false when birthdate is changed along with the other fields
@@ -106,7 +107,7 @@ public class PersonTest {
     //test to see if code fails upon wrong inputs
     @Test
     void addDemeritPoints_InvalidDateFormat_ReturnsFailed() {
-        Person p = new Person("57b#@g$TRU", "Liam", "West",
+        Person p = new Person("57b#@g", "Liam", "West",
                 "10|George St|Melbourne|Victoria|Australia", "01-01-1990");
         p.addPerson();
         assertEquals("Failed", p.addDemeritPoints("2024-03-15", 3)); // YYYY-MM-DD format
@@ -130,9 +131,9 @@ public class PersonTest {
         assertTrue(p.isSuspended());
     }
     @Test 
-    void addDemeritPoints_ExactlyTwoYearsAgo_CountsPoints() {
-        Files.write(Paths.get("offenses.txt"), new ArrayList<>());
-        
+    void addDemeritPoints_ExactlyTwoYearsAgo_CountsPoints() throws IOException {
+        Files.write(Paths.get("offenses.txt"), new byte[0]);
+
         Person p = new Person("89*&^cFG", "Lucy", "Chen",
                 "33|Elm St|Melbourne|Victoria|Australia", "05-05-1985");
         assertTrue(p.addPerson());
